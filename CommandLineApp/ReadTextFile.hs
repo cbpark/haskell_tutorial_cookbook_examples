@@ -1,10 +1,8 @@
 module Main where
-  
-import System.IO
-import Control.Monad
 
+main :: IO ()
 main = do
-  entireFileAsString <- readFile "temp.txt"
-  print entireFileAsString
-  let allWords = words entireFileAsString
-  print allWords
+    entireFileAsString <- readFile "temp.txt"
+    print entireFileAsString
+    let allWords = words entireFileAsString
+    print allWords
