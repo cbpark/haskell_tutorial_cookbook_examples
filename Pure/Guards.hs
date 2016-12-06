@@ -1,9 +1,5 @@
 module Main where
 
--- import           Data.Maybe
--- import           System.Random
-
-
 spaceship :: (Num a, Ord a) => a -> a
 spaceship n | n < 0     = -1
             | n == 0    = 0

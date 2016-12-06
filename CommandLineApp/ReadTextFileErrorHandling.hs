@@ -1,6 +1,5 @@
 module Main where
-  
-import System.IO
+
 import Control.Exception
 
 -- catchAny from Michael Snoyman's aticle:
@@ -8,15 +7,21 @@ import Control.Exception
 catchAny :: IO a -> (SomeException -> IO a) -> IO a
 catchAny = Control.Exception.catch
 
+{-
 safeFileReader :: FilePath -> IO String
 safeFileReader fPath = do
-  entireFileAsString <- catchAny (readFile "temp.txt") $ \error -> do
-    putStrLn $ "Error: " ++ show error
+    entireFileAsString <- catchAny (readFile "temp.txt") $ \err -> do
+        putStrLn $ "Error: " ++ show err
+        return ""
+    return entireFileAsString
+-}
+safeFileReader :: FilePath -> IO String
+safeFileReader fPath = catchAny (readFile fPath) $ \err -> do
+    putStrLn $ "Error: " ++ show err
     return ""
-  return entireFileAsString
-  
+
 main :: IO ()
 main = do
-  fContents <- safeFileReader "temp.txt"
-  print fContents
-  print $ words fContents
+    fContents <- safeFileReader "temp.txt"
+    print fContents
+    print $ words fContents
